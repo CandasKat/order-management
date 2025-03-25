@@ -3,7 +3,7 @@
 1. **Cloner le dépôt :**  
    Clonez ce dépôt sur votre machine :
    ```bash
-   git clone <URL_DU_DEPOT>
+   git clone https://github.com/CandasKat/order-management.git
 
 2. **Naviguer dans le répertoire du projet :**
     ```bash
