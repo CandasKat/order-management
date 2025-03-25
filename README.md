@@ -7,7 +7,7 @@
 
 2. **Naviguer dans le répertoire du projet :**
     ```bash
-    cd nom-du-projet
+    cd order-management
 
 3. **Prérequis :** 
    Assurez-vous que les outils suivants sont installés sur votre machine :
