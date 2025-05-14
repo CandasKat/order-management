@@ -1,5 +1,7 @@
-package com.candas.order_management;
+package com.candas.order_management.service;
 
+import com.candas.order_management.models.Commandes;
+import com.candas.order_management.repository.CommandesRepository;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

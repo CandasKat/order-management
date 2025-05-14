@@ -1,4 +1,4 @@
-package com.candas.order_management;
+package com.candas.order_management.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

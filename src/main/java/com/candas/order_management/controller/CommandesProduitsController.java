@@ -1,5 +1,7 @@
-package com.candas.order_management;
+package com.candas.order_management.controller;
 
+import com.candas.order_management.models.CommandesProduits;
+import com.candas.order_management.service.CommandesProduitsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

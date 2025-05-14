@@ -1,8 +1,7 @@
-package com.candas.order_management;
+package com.candas.order_management.models;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.query.Order;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
