@@ -1,7 +1,9 @@
 package com.candas.order_management.controller;
 
+import com.candas.order_management.dto.CommandesDTO;
 import com.candas.order_management.models.Commandes;
 import com.candas.order_management.service.CommandesService;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +22,19 @@ public class CommandesController {
     }
 
     @PostMapping("/commandes")
-    public ResponseEntity<Commandes> saveCommandes(@RequestBody Commandes commandes) {
-        Commandes newCommandes = commandesService.saveCommandes(commandes);
-        return ResponseEntity.ok(newCommandes);
+    @ResponseBody
+    public ResponseEntity<Commandes> saveCommandes(@RequestBody CommandesDTO dto) {
+        return ResponseEntity.ok(commandesService.saveCommandes(dto));
     }
 
     @GetMapping("/commandes")
     public List<Commandes> getAllCommandes() {
         return commandesService.getAllCommandes();
+    }
+
+    @GetMapping("/commandes/statut/{statut}")
+    public List<Commandes> getCommandesByStatut(@PathVariable Commandes.OrderStatus statut) {
+        return commandesService.getCommandesByStatut(statut);
     }
 
     @GetMapping("/commandes/{id}")
@@ -37,9 +44,10 @@ public class CommandesController {
     }
 
     @PutMapping("/commandes/{id}")
-    public ResponseEntity<Commandes> updateCommandes(@PathVariable long id, @RequestBody Commandes commandes) {
-        Commandes commande = commandesService.updateCommandes(id, commandes);
-        return ResponseEntity.ok(commande);
+    public ResponseEntity<Commandes> updateCommandes(@PathVariable long id, @RequestBody CommandesDTO dto) {
+        Commandes commandes = commandesService.updateCommandes(id, dto);
+        return ResponseEntity.ok(commandes);
+
     }
 
     @DeleteMapping("/commandes/{id}")

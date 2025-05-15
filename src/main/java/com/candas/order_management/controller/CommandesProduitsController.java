@@ -1,5 +1,6 @@
 package com.candas.order_management.controller;
 
+import com.candas.order_management.dto.CommandesProduitsDTO;
 import com.candas.order_management.models.CommandesProduits;
 import com.candas.order_management.service.CommandesProduitsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class CommandesProduitsController {
     }
 
     @PostMapping("/commandes_produits")
-    public ResponseEntity<CommandesProduits> saveCommandes(@RequestBody CommandesProduits commandes) {
-        CommandesProduits newCommandes = commandesProduitsService.saveCommandeProduits(commandes);
+    public ResponseEntity<CommandesProduits> saveCommandes(@RequestBody CommandesProduitsDTO dto) {
+        CommandesProduits newCommandes = commandesProduitsService.saveCommandeProduits(dto);
         return ResponseEntity.ok(newCommandes);
     }
 
@@ -37,8 +38,14 @@ public class CommandesProduitsController {
     }
 
     @PutMapping("/commandes_produits/{id}")
-    public ResponseEntity<CommandesProduits> updateCommande(@PathVariable long id, @RequestBody CommandesProduits commandes) {
-        CommandesProduits commandesProduits = commandesProduitsService.updateCommandeProduits(id, commandes);
+    public ResponseEntity<CommandesProduits> updateCommande(@PathVariable long id, @RequestBody CommandesProduitsDTO dto) {
+        CommandesProduits commandesProduits = commandesProduitsService.updateCommandeProduits(id, dto);
         return ResponseEntity.ok(commandesProduits);
+    }
+
+    @DeleteMapping("/commandes_produits/{id}")
+    public ResponseEntity<String> deleteCommandeProduits(@PathVariable long id) {
+        commandesProduitsService.deleteCommandeProduits(id);
+        return ResponseEntity.ok("Commandes deleted successfully");
     }
 }

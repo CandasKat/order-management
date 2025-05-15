@@ -1,5 +1,6 @@
 package com.candas.order_management.service;
 
+import com.candas.order_management.dto.CommandesDTO;
 import com.candas.order_management.models.Commandes;
 import com.candas.order_management.repository.CommandesRepository;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,10 @@ public class CommandesService {
         this.commandesRepository = commandesRepository;
     }
 
-    public Commandes saveCommandes(Commandes commandes) {
-        logger.info("Saving commandes " + commandes);
-        return this.commandesRepository.save(commandes);
+    public Commandes saveCommandes(CommandesDTO dto) {
+        Commandes commande = new Commandes(dto.status);
+        logger.info("Saving commandes " + commande);
+        return this.commandesRepository.save(commande);
     }
 
     public List<Commandes> getAllCommandes() {
@@ -31,22 +33,23 @@ public class CommandesService {
         return this.commandesRepository.findAll();
     }
 
+    public List<Commandes> getCommandesByStatut(Commandes.OrderStatus statut) {
+        logger.info("Getting commandes by statut: " + statut);
+        return this.commandesRepository.findByStatut(statut);
+    }
+
     public Optional<Commandes> getCommandesById(Long id) {
         logger.info("Getting commandes by id: " + id);
         return this.commandesRepository.findById(id);
     }
 
-    public Commandes updateCommandes(Long id, Commandes updatedCommand) {
-        Optional<Commandes> commandesOptional = this.commandesRepository.findById(id);
-        if (commandesOptional.isPresent()) {
-            Commandes commandes = commandesOptional.get();
-            commandes.setStatus(updatedCommand.getStatus());
-            logger.info("Updating commandes with id: " + id + " with status: " + updatedCommand.getStatus());
-            return this.commandesRepository.save(commandes);
-        }
-        else {
-            throw new RuntimeException("Commandes not found");
-        }
+    public Commandes updateCommandes(Long id, CommandesDTO dto) {
+        Commandes existing = this.commandesRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("CommandesProduits not found with id: " + id));
+        existing.setStatut(dto.status);
+        logger.info("Updating commandes with id: " + id + " with status: " + existing.getStatut());
+        return this.commandesRepository.save(existing);
+
     }
 
     public void deleteCommandes(Long id) {
