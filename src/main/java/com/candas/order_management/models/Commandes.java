@@ -58,11 +58,11 @@ public class Commandes {
         this.total = total;
     }
 
-    public OrderStatus getStatus() {
+    public OrderStatus getStatut() {
         return this.statut;
     }
 
-    public void setStatus(OrderStatus statut) {
+    public void setStatut(OrderStatus statut) {
         this.statut = statut;
     }
 
@@ -83,10 +83,12 @@ public class Commandes {
     public void addOrderProduct(CommandesProduits orderProduct) {
         commandesProduits.add(orderProduct);
         orderProduct.setCommande(this);
+        this.calculateTotal();
     }
 
     public void removeOrderProduct(CommandesProduits orderProduct) {
         commandesProduits.remove(orderProduct);
         orderProduct.setCommande(null);
+        this.calculateTotal();
     }
 }
