@@ -16,8 +16,8 @@ public class RabbitMQConfig {
     public static final String ROUTING_KEY = "product.update";
 
     @Bean
-    public TopicExchange exchange() {
-        return new TopicExchange(EXCHANGE_NAME);
+    public DirectExchange exchange() {
+        return new DirectExchange(EXCHANGE_NAME);
     }
 
     @Bean
@@ -26,7 +26,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding binding(Queue queue, TopicExchange exchange) {
+    public Binding binding(Queue queue, DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
     }
 
